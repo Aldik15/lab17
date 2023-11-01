@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическая работа 17</title>
+    <style>
+        /* Основные стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Галерея изображений (Задача 1) */
+        .image-gallery {
+            text-align: center;
+        }
+
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Анимация элемента (Задача 2) */
+        .animated-element {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            margin: 20px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .animated-element:hover {
+            width: 150px;
+            height: 150px;
+            background-color: #e74c3c;
+        }
+
+        /* Анимация элемента (Задача 3) */
+        .moving-element {
+            width: 100px;
+            height: 100px;
+            background-color: #e74c3c;
+            position: absolute;
+            animation: move 4s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                left: 0;
+            }
+            100% {
+                left: calc(100% - 100px);
+            }
+        }
+
+        /* Выезжающее меню (Задача 4) */
+        .sidebar {
+            width: 0;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #3498db;
+        }
+
+        .open-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Практическая работа 17</h1>
+
+    <!-- Задача 1: Галерея изображений -->
+    <div class="image-gallery">
+        <img src="image1.jpg" alt="Изображение 1">
+        <div class="button-container">
+            <button id="prevButton">Предыдущее</button>
+            <button id="nextButton">Следующее</button>
+        </div>
+    </div>
+
+    <!-- Задача 2: Анимация элемента -->
+    <div class="animated-element" id="animatedElement"></div>
+
+    <!-- Задача 3: Анимация элемента -->
+    <div class="moving-element"></div>
+
+    <!-- Задача 4: Выезжающее меню -->
+    <button class="open-button" onclick="openSidebar()">Открыть меню</button>
+    <div class="sidebar" id="mySidebar">
+        <a href="javascript:void(0)" class="close-button" onclick="closeSidebar()">&times;</a>
+        <a href="#">Ссылка 1</a>
+        <a href="#">Ссылка 2</a>
+        <a href="#">Ссылка 3</a>
+    </div>
+
+    <!-- Задача 5: Форма и обработка AJAX -->
+    <form id="dataForm">
+        <label for="dataInput">Введите данные:</label>
+        <input type="text" id="dataInput" required>
+        <button type="submit">Отправить данные</button>
+    </form>
+
+    <div id="resultBlock">
+        <h2>Ответ от сервера:</h2>
+        <p id="responseText"></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Задача 1: Галерея изображений
+        const images = ["https://expositions.nlr.ru/ve/dep/artupload/ve/article/RA4794/MA42197/NA46456.jpg", "https://mf.b37mrtl.ru/russian/images/2019.08/article/5d544741370f2c7c558b45a3.jpg"];
+        let currentImage = 0;
+
+        function showImage(index) {
+            if (index >= 0 && index < images.length) {
+                const img = document.querySelector(".image-gallery img");
+                img.src = images[index];
+                currentImage = index;
+            }
+        }
+
+        $("#prevButton").click(() => {
+            showImage(currentImage - 1);
+        });
+
+        $("#nextButton").click(() => {
+            showImage(currentImage + 1);
+        });
+
+        // Задача 4: Выезжающее меню
+        function openSidebar() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+
+        function closeSidebar() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+    </script>
+</body>
+</html>
